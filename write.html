@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ Post: <input id="postcreate" class="input-box" type="text" placeholder="Create a Post" required />
+ <div class="button">
+    <button type="submit" id="Post"  name="Login" value="Login">Post</button>
+
+    <!-- <center><button type="submit" id="signUp" class="signup-button" name="signup-submit" value="Sign up">Sign
+            up</button></center> -->
+</div>
+<div id="postview"></div>
+
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-analytics.js";
+        import { getDatabase,set ,ref,push,child } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyDdqR1j1nWmtZKUPLnbspF1YjEtLR6Agn4",
+          authDomain: "boiler-plate-read-update.firebaseapp.com",
+          projectId: "boiler-plate-read-update",
+          storageBucket: "boiler-plate-read-update.appspot.com",
+          messagingSenderId: "627502725732",
+          appId: "1:627502725732:web:97d8a6b9a0fced743f3d71",
+          measurementId: "G-XP3B8KDMTY"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+
+
+        Post.addEventListener('click', (e) => {
+       let postcreate =document.getElementById('postcreate').value;
+            
+       const userId=push(child(ref(database),'posts')).key;
+       const postview = document.getElementById('postview').innerHTML=postcreate 
+  set(ref(database, 'posts/' + userId), {
+    postcreate: postcreate,
+
+  });
+     alert('Post Created ')
+        })
+      </script>
+</body>
+</html>
